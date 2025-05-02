@@ -1,16 +1,16 @@
 # js-boost
 
-高性能 JavaScript 工具库，提供虚拟滚动等组件，用于优化大数据量渲染性能。
+High-performance JavaScript utility library, providing components like virtual scrolling to optimize rendering performance for large datasets.
 
-## 安装
+## Installation
 
 ```bash
 npm install js-boost
 ```
 
-## 使用方法
+## Usage
 
-### 浏览器直接引用
+### Browser Direct Reference
 
 ```html
 <script src="path/to/js-boost/src/index.js"></script>
@@ -19,7 +19,7 @@ npm install js-boost
 
 <script>
   const data = Array.from({ length: 10000 }, (_, i) => ({ id: i, name: `Item ${i}` }));
-
+  
   const virtualScroll = new JsBoost.VirtualScroll({
     container: document.getElementById('container'),
     items: data,
@@ -47,7 +47,7 @@ npm install js-boost
 </script>
 ```
 
-### NPM 模块引入
+### NPM Module Import
 
 ```javascript
 import { VirtualScroll } from 'js-boost';
@@ -59,45 +59,45 @@ const virtualScroll = new VirtualScroll({
   items: data,
   itemHeight: 40,
   renderItem: (item) => {
-    // 自定义渲染逻辑
+    // Custom rendering logic
   }
 });
 
-// 更新数据
+// Update data
 function updateData(newData) {
   virtualScroll.updateItems(newData);
 }
 
-// 滚动到指定位置
+// Scroll to specific position
 function scrollToItem(index) {
   virtualScroll.scrollToIndex(index);
 }
 ```
 
-## API 参考
+## API Reference
 
 ### VirtualScroll
 
-#### 构造函数选项
+#### Constructor Options
 
-| 选项 | 类型 | 默认值 | 描述 |
+| Option | Type | Default | Description |
 |-----|------|-------|------|
-| container | HTMLElement | 必填 | 滚动容器元素 |
-| items | Array | [] | 要渲染的数据项数组 |
-| itemHeight | Number | 40 | 每个列表项的高度（像素） |
-| bufferSize | Number | 10 | 可视区域外的缓冲项数量 |
-| renderItem | Function | - | 自定义项目渲染函数 |
-| renderHeader | Function | - | 自定义头部渲染函数 |
+| container | HTMLElement | Required | Scroll container element |
+| items | Array | [] | Data items array to render |
+| itemHeight | Number | 40 | Height of each list item (pixels) |
+| bufferSize | Number | 10 | Number of buffer items outside the visible area |
+| renderItem | Function | - | Custom item rendering function |
+| renderHeader | Function | - | Custom header rendering function |
 
-#### 方法
+#### Methods
 
-| 方法 | 参数 | 返回值 | 描述 |
+| Method | Parameters | Return | Description |
 |-----|------|-------|------|
-| updateItems | (items: Array) | void | 更新数据项并重新渲染 |
-| scrollToIndex | (index: Number) | void | 滚动到指定索引位置 |
-| refresh | () | void | 刷新当前视图 |
-| destroy | () | void | 销毁组件，释放资源 |
+| updateItems | (items: Array) | void | Update data items and re-render |
+| scrollToIndex | (index: Number) | void | Scroll to specified index position |
+| refresh | () | void | Refresh current view |
+| destroy | () | void | Destroy component and release resources |
 
-## 许可证
+## License
 
-本项目采用 MIT 许可证。详情请查看 [LICENSE](LICENSE) 文件。
+This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.

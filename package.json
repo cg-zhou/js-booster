@@ -1,0 +1,41 @@
+{
+  "name": "js-booster",
+  "version": "1.0.0",
+  "description": "高性能JavaScript工具库，包含虚拟滚动等组件",
+  "main": "src/index.js",
+  "files": [
+    "src",
+    "README.md",
+    "LICENSE"
+  ],
+  "scripts": {
+    "test": "jest",
+    "test:watch": "jest --watch",
+    "test:coverage": "jest --coverage",
+    "build": "rollup -c",
+    "prepublishOnly": "npm run build"
+  },
+  "keywords": [
+    "virtual scroll",
+    "performance",
+    "frontend",
+    "ui components",
+    "javascript"
+  ],
+  "author": "cg-zhou",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/cg-zhou/js-boost.git"
+  },
+  "bugs": {
+    "url": "https://github.com/cg-zhou/js-boost/issues"
+  },
+  "homepage": "https://github.com/cg-zhou/js-boost#readme",
+  "devDependencies": {
+    "jest": "^29.7.0",
+    "jest-environment-jsdom": "^29.7.0",
+    "rollup": "^4.9.1",
+    "rollup-plugin-terser": "^7.0.2"
+  }
+}

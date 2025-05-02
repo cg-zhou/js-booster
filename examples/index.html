@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>js-boost Virtual Scroll Demo</title>
+  <style>
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      margin: 0;
+      padding: 20px;
+      color: #333;
+      background-color: #f5f5f5;
+    }
+
+    h1 {
+      color: #2c3e50;
+      margin-bottom: 10px;
+    }
+
+    p {
+      color: #7f8c8d;
+      margin-bottom: 20px;
+    }
+
+    .container {
+      max-width: 1000px;
+      margin: 0 auto;
+      background-color: white;
+      border-radius: 8px;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+      padding: 20px;
+    }
+
+    .demo-section {
+      margin-bottom: 30px;
+      padding-bottom: 20px;
+      border-bottom: 1px solid #eee;
+    }
+
+    .demo-section:last-child {
+      border-bottom: none;
+    }
+
+    .demo-title {
+      font-size: 1.2em;
+      color: #3498db;
+      margin-bottom: 15px;
+    }
+
+    .scroll-container {
+      height: 400px;
+      border: 1px solid #ddd;
+      border-radius: 4px;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .controls {
+      margin-bottom: 15px;
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    button {
+      background-color: #3498db;
+      color: white;
+      border: none;
+      padding: 8px 15px;
+      border-radius: 4px;
+      cursor: pointer;
+      transition: background-color 0.2s;
+    }
+
+    button:hover {
+      background-color: #2980b9;
+    }
+
+    input {
+      padding: 8px;
+      border: 1px solid #ddd;
+      border-radius: 4px;
+      width: 80px;
+    }
+
+    /* 虚拟滚动项样式 */
+    .vs-table-header {
+      display: flex;
+      background-color: #f8f9fa;
+      border-bottom: 2px solid #dee2e6;
+      font-weight: bold;
+      position: sticky;
+      top: 0;
+      z-index: 1;
+    }
+
+    .vs-table-row {
+      display: flex;
+      border-bottom: 1px solid #e9ecef;
+    }
+
+    .vs-table-row:hover {
+      background-color: #f8f9fa;
+    }
+
+    .vs-table-header-cell,
+    .vs-table-cell {
+      padding: 10px 15px;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
+    .vs-table-header-cell:nth-child(1),
+    .vs-table-cell:nth-child(1) {
+      width: 80px;
+    }
+
+    .vs-table-header-cell:nth-child(2),
+    .vs-table-cell:nth-child(2) {
+      flex: 1;
+    }
+
+    .vs-table-header-cell:nth-child(3),
+    .vs-table-cell:nth-child(3) {
+      width: 100px;
+      text-align: center;
+    }
+
+    .status-tag {
+      display: inline-block;
+      padding: 3px 8px;
+      border-radius: 4px;
+      font-size: 12px;
+    }
+
+    .status-success {
+      background-color: #e6f7e6;
+      color: #28a745;
+      border: 1px solid #28a745;
+    }
+
+    .status-fail {
+      background-color: #fce8e8;
+      color: #dc3545;
+      border: 1px solid #dc3545;
+    }
+
+    /* 代码块样式 */
+    pre {
+      background-color: #f8f9fa;
+      padding: 15px;
+      border-radius: 4px;
+      overflow: auto;
+      font-family: Consolas, Monaco, 'Andale Mono', monospace;
+      font-size: 14px;
+      line-height: 1.5;
+    }
+
+    code {
+      color: #e83e8c;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>js-boost Virtual Scroll</h1>
+    <p>High-performance virtual scrolling component for rendering large datasets efficiently.</p>
+
+    <div class="demo-section">
+      <div class="demo-title">Basic Example - 1,000,000 Items</div>
+      <div class="controls">
+        <button id="scroll-top">Scroll to Top</button>
+        <button id="scroll-middle">Scroll to Middle</button>
+        <button id="scroll-bottom">Scroll to Bottom</button>
+        <button id="scroll-to">Scroll to Index</button>
+        <input type="number" id="scroll-index" value="500" min="0" max="999999">
+      </div>
+      <div id="basic-demo" class="scroll-container"></div>
+    </div>
+
+
+  </div>
+
+  <!-- Import virtual scroll component -->
+  <script src="../src/virtual-scroll.js"></script>
+
+  <script>
+    // Generate test data
+    const generateData = (count) => {
+      return Array.from({ length: count }, (_, i) => ({
+        id: i,
+        name: `Item ${i} - ${Math.random().toString(36).substring(2, 10)}`,
+        status: Math.random() > 0.3 ? 'success' : 'fail'
+      }));
+    };
+
+    // Basic example
+    document.addEventListener('DOMContentLoaded', () => {
+      const data = generateData(1000000);
+      const container = document.getElementById('basic-demo');
+
+      // Create virtual scroll instance
+      const virtualScroll = new VirtualScroll({
+        container: container,
+        items: data,
+        itemHeight: 40,
+        bufferSize: 10,
+        renderItem: (item, index) => {
+          const div = document.createElement('div');
+          div.className = 'vs-table-row';
+          div.innerHTML = `
+            <div class="vs-table-cell">${item.id}</div>
+            <div class="vs-table-cell">${item.name}</div>
+            <div class="vs-table-cell">
+              <span class="status-tag ${item.status === 'success' ? 'status-success' : 'status-fail'}">
+                ${item.status === 'success' ? 'Success' : 'Failed'}
+              </span>
+            </div>
+          `;
+          return div;
+        },
+        renderHeader: () => {
+          const header = document.createElement('div');
+          header.className = 'vs-table-header';
+          header.innerHTML = `
+            <div class="vs-table-header-cell">ID</div>
+            <div class="vs-table-header-cell">Name</div>
+            <div class="vs-table-header-cell">Status</div>
+          `;
+          return header;
+        }
+      });
+
+      // Scroll controls
+      document.getElementById('scroll-top').addEventListener('click', () => {
+        virtualScroll.scrollToIndex(0);
+      });
+
+      document.getElementById('scroll-middle').addEventListener('click', () => {
+        virtualScroll.scrollToIndex(500000);
+      });
+
+      document.getElementById('scroll-bottom').addEventListener('click', () => {
+        virtualScroll.scrollToIndex(999999);
+      });
+
+      document.getElementById('scroll-to').addEventListener('click', () => {
+        const index = parseInt(document.getElementById('scroll-index').value, 10);
+        if (!isNaN(index) && index >= 0 && index < 1000000) {
+          virtualScroll.scrollToIndex(index);
+        }
+      });
+    });
+  </script>
+</body>
+</html>
