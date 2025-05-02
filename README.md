@@ -1,11 +1,11 @@
-# js-boost
+# js-booster
 
 高性能 JavaScript 工具库，提供虚拟滚动等组件，用于优化大数据量渲染性能。
 
 ## 安装
 
 ```bash
-npm install js-boost
+npm install js-booster
 ```
 
 ## 使用方法
@@ -13,14 +13,14 @@ npm install js-boost
 ### 浏览器直接引用
 
 ```html
-<script src="path/to/js-boost/src/index.js"></script>
+<script src="path/to/js-booster/src/index.js"></script>
 
 <div id="container" style="height: 500px;"></div>
 
 <script>
   const data = Array.from({ length: 10000 }, (_, i) => ({ id: i, name: `Item ${i}` }));
 
-  const virtualScroll = new JsBoost.VirtualScroll({
+  const virtualScroll = new JsBooster.VirtualScroll({
     container: document.getElementById('container'),
     items: data,
     itemHeight: 40,
@@ -50,7 +50,7 @@ npm install js-boost
 ### NPM 模块引入
 
 ```javascript
-import { VirtualScroll } from 'js-boost';
+import { VirtualScroll } from 'js-booster';
 
 const data = Array.from({ length: 10000 }, (_, i) => ({ id: i, name: `Item ${i}` }));
 

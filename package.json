@@ -2,9 +2,12 @@
   "name": "js-booster",
   "version": "1.0.0",
   "description": "高性能JavaScript工具库，包含虚拟滚动等组件",
-  "main": "src/index.js",
+  "type": "module",
+  "main": "dist/js-booster.js",
+  "module": "dist/js-booster.esm.js",
   "files": [
     "src",
+    "dist",
     "README.md",
     "LICENSE"
   ],
@@ -26,13 +29,15 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/cg-zhou/js-boost.git"
+    "url": "git+https://github.com/cg-zhou/js-booster.git"
   },
   "bugs": {
-    "url": "https://github.com/cg-zhou/js-boost/issues"
+    "url": "https://github.com/cg-zhou/js-booster/issues"
   },
-  "homepage": "https://github.com/cg-zhou/js-boost#readme",
+  "homepage": "https://github.com/cg-zhou/js-booster#readme",
   "devDependencies": {
+    "@rollup/plugin-commonjs": "^28.0.3",
+    "@rollup/plugin-node-resolve": "^16.0.1",
     "jest": "^29.7.0",
     "jest-environment-jsdom": "^29.7.0",
     "rollup": "^4.9.1",

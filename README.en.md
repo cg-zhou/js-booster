@@ -1,11 +1,11 @@
-# js-boost
+# js-booster
 
 High-performance JavaScript utility library, providing components like virtual scrolling to optimize rendering performance for large datasets.
 
 ## Installation
 
 ```bash
-npm install js-boost
+npm install js-booster
 ```
 
 ## Usage
@@ -13,14 +13,14 @@ npm install js-boost
 ### Browser Direct Reference
 
 ```html
-<script src="path/to/js-boost/src/index.js"></script>
+<script src="path/to/js-booster/src/index.js"></script>
 
 <div id="container" style="height: 500px;"></div>
 
 <script>
   const data = Array.from({ length: 10000 }, (_, i) => ({ id: i, name: `Item ${i}` }));
-  
-  const virtualScroll = new JsBoost.VirtualScroll({
+
+  const virtualScroll = new JsBooster.VirtualScroll({
     container: document.getElementById('container'),
     items: data,
     itemHeight: 40,
@@ -50,7 +50,7 @@ npm install js-boost
 ### NPM Module Import
 
 ```javascript
-import { VirtualScroll } from 'js-boost';
+import { VirtualScroll } from 'js-booster';
 
 const data = Array.from({ length: 10000 }, (_, i) => ({ id: i, name: `Item ${i}` }));
 

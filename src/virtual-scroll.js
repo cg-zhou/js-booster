@@ -1,8 +1,8 @@
 /**
- * js-boost - High-performance frontend library
+ * js-booster - High-performance frontend library
  * VirtualScroll - Virtual scrolling implementation
  * @version 1.0.0
- * @author js-boost team
+ * @author https://cg-zhou.top/
  * @license MIT
  */
 
@@ -238,7 +238,5 @@ class VirtualScroll {
   }
 }
 
-// 如果在 Node.js 环境中，导出模块
-if (typeof module !== 'undefined' && module.exports) {
-  module.exports = { VirtualScroll };
-}
+// 导出 VirtualScroll 类
+export { VirtualScroll };

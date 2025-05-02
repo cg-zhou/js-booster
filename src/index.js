@@ -1,20 +1,18 @@
 /**
- * js-boost - High-performance frontend library
+ * js-booster - High-performance frontend library
  * @version 1.0.0
- * @author js-boost team
+ * @author https://cg-zhou.top/
  * @license MIT
  */
 
-const { VirtualScroll } = require('./virtual-scroll');
+import { VirtualScroll } from './virtual-scroll';
 
 // Export all components
-module.exports = {
-  VirtualScroll
-};
+export { VirtualScroll };
 
 // If in browser environment, add to global object
 if (typeof window !== 'undefined') {
-  window.JsBoost = {
+  window.JsBooster = {
     VirtualScroll
   };
 }
