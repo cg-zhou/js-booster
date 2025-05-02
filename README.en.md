@@ -14,10 +14,10 @@ npm install js-booster
 
 ```html
 <!-- Production (minified) -->
-<script src="https://unpkg.com/js-booster@1.0.1/dist/js-booster.min.js"></script>
+<script src="https://unpkg.com/js-booster/dist/js-booster.min.js"></script>
 
 <!-- Development (unminified) -->
-<script src="https://unpkg.com/js-booster@1.0.1/dist/js-booster.js"></script>
+<script src="https://unpkg.com/js-booster/dist/js-booster.js"></script>
 ```
 
 ## Usage
@@ -26,7 +26,7 @@ npm install js-booster
 
 ```html
 <!-- Using CDN -->
-<script src="https://unpkg.com/js-booster@1.0.1/dist/js-booster.min.js"></script>
+<script src="https://unpkg.com/js-booster/dist/js-booster.min.js"></script>
 
 <div id="container" style="height: 500px;"></div>
 

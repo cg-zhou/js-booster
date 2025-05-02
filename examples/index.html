@@ -183,8 +183,11 @@
 
   </div>
 
+  <!-- Import virtual scroll component from local path -->
+  <script src="../dist/js-booster.min.js"></script>
+
   <!-- Import virtual scroll component from CDN -->
-  <script src="https://unpkg.com/js-booster/dist/js-booster.min.js"></script>
+  <!-- <script src="https://unpkg.com/js-booster/dist/js-booster.min.js"></script> -->
 
   <script>
     // Generate test data
@@ -198,7 +201,7 @@
 
     // Basic example
     document.addEventListener('DOMContentLoaded', () => {
-      const data = generateData(1000000);
+      const data = generateData(600000);
       const container = document.getElementById('basic-demo');
 
       // Create virtual scroll instance

@@ -14,10 +14,10 @@ npm install js-booster
 
 ```html
 <!-- 生产环境（压缩版） -->
-<script src="https://unpkg.com/js-booster@1.0.1/dist/js-booster.min.js"></script>
+<script src="https://unpkg.com/js-booster/dist/js-booster.min.js"></script>
 
 <!-- 开发环境（未压缩） -->
-<script src="https://unpkg.com/js-booster@1.0.1/dist/js-booster.js"></script>
+<script src="https://unpkg.com/js-booster/dist/js-booster.js"></script>
 ```
 
 ## 使用方法
@@ -26,7 +26,7 @@ npm install js-booster
 
 ```html
 <!-- 使用 CDN -->
-<script src="https://unpkg.com/js-booster@1.0.1/dist/js-booster.min.js"></script>
+<script src="https://unpkg.com/js-booster/dist/js-booster.min.js"></script>
 
 <div id="container" style="height: 500px;"></div>
 

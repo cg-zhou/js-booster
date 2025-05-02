@@ -1,6 +1,6 @@
 {
   "name": "js-booster",
-  "version": "1.0.1",
+  "version": "1.0.8",
   "description": "高性能JavaScript工具库，包含虚拟滚动等组件",
   "type": "module",
   "main": "dist/js-booster.js",

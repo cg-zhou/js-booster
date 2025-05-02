@@ -1,7 +1,7 @@
 /**
  * js-booster - High-performance frontend library
  * VirtualScroll - Virtual scrolling implementation
- * @version 1.0.1
+ * @version 1.0.8
  * @author https://cg-zhou.top/
  * @license MIT
  */
@@ -16,6 +16,7 @@ class VirtualScroll {
    * @param {number} [options.bufferSize=10] Number of buffer items outside the visible area
    * @param {Function} [options.renderItem] Custom item rendering function
    * @param {Function} [options.renderHeader] Custom header rendering function
+   * @param {number} [options.maxHeight=26840000] Maximum height in pixels for the content wrapper
    */
   constructor(options) {
     this.container = options.container;
@@ -24,12 +25,20 @@ class VirtualScroll {
     this.bufferSize = options.bufferSize || 10;
     this.customRenderItem = options.renderItem;
     this.customRenderHeader = options.renderHeader;
+    this.maxHeight = options.maxHeight || 26840000; // 添加最大高度限制，防止DOM高度过大
 
     this.visibleStartIndex = 0;
     this.visibleEndIndex = 0;
     this.scrollContainer = null;
     this.contentWrapper = null;
     this.contentContainer = null;
+    this.totalHeight = this.items.length * this.itemHeight;
+    this.heightScale = 1; // 高度缩放因子
+
+    // 如果总高度超过最大高度，计算缩放因子
+    if (this.totalHeight > this.maxHeight) {
+      this.heightScale = this.maxHeight / this.totalHeight;
+    }
 
     this.initialize();
   }
@@ -65,8 +74,8 @@ class VirtualScroll {
           zIndex: '1',
           width: '100%',
           boxSizing: 'border-box',
-          backgroundColor: '#f8f9fa', // 添加背景色，防止内容透过表头
-          borderBottom: '2px solid #dee2e6' // 添加底部边框，增强视觉分隔
+          backgroundColor: '#f8f9fa',
+          borderBottom: '2px solid #dee2e6'
         });
 
         this.scrollContainer.appendChild(header);
@@ -80,8 +89,10 @@ class VirtualScroll {
       position: 'relative',
       width: '100%'
     });
-    // 明确设置高度为像素值，确保测试能够通过
-    this.contentWrapper.style.height = `${this.items.length * this.itemHeight}px`;
+    
+    // 使用缩放后的高度，确保不超过浏览器限制
+    const scaledHeight = this.totalHeight * this.heightScale;
+    this.contentWrapper.style.height = `${scaledHeight}px`;
 
     // Create content container
     this.contentContainer = document.createElement('div');
@@ -112,11 +123,14 @@ class VirtualScroll {
     const scrollTop = this.scrollContainer.scrollTop;
     const containerHeight = this.scrollContainer.clientHeight;
 
+    // 考虑缩放因子进行计算
+    const realScrollTop = scrollTop / this.heightScale;
+
     // Calculate visible range
-    const startIndex = Math.max(0, Math.floor(scrollTop / this.itemHeight) - this.bufferSize);
+    const startIndex = Math.max(0, Math.floor(realScrollTop / this.itemHeight) - this.bufferSize);
     const endIndex = Math.min(
       this.items.length,
-      Math.ceil((scrollTop + containerHeight) / this.itemHeight) + this.bufferSize
+      Math.ceil((realScrollTop + containerHeight / this.heightScale) / this.itemHeight) + this.bufferSize
     );
 
     // Only update when visible range changes
@@ -137,8 +151,8 @@ class VirtualScroll {
     // Clear content container
     this.contentContainer.innerHTML = '';
 
-    // Set content container position
-    this.contentContainer.style.transform = `translateY(${startIndex * this.itemHeight}px)`;
+    // 考虑缩放因子设置位置
+    this.contentContainer.style.transform = `translateY(${startIndex * this.itemHeight * this.heightScale}px)`;
 
     // Render visible items
     for (let i = startIndex; i < endIndex; i++) {
@@ -149,7 +163,7 @@ class VirtualScroll {
         const itemElement = this.customRenderItem(item, i);
         if (itemElement) {
           // Only set necessary height styles, other styles are determined by the caller
-          itemElement.style.height = `${this.itemHeight}px`;
+          itemElement.style.height = `${this.itemHeight * this.heightScale}px`;
           itemElement.style.boxSizing = 'border-box';
           itemElement.style.width = '100%';
 
@@ -159,7 +173,7 @@ class VirtualScroll {
         // Use default rendering - very simple default implementation
         const row = document.createElement('div');
         Object.assign(row.style, {
-          height: `${this.itemHeight}px`,
+          height: `${this.itemHeight * this.heightScale}px`,
           width: '100%',
           boxSizing: 'border-box',
           padding: '8px',
@@ -178,10 +192,17 @@ class VirtualScroll {
    */
   updateItems(items) {
     this.items = items || [];
+    this.totalHeight = this.items.length * this.itemHeight;
+    
+    // 重新计算缩放因子
+    this.heightScale = 1;
+    if (this.totalHeight > this.maxHeight) {
+      this.heightScale = this.maxHeight / this.totalHeight;
+    }
 
-    // 确保高度设置正确，使用直接赋值而不是通过 Object.assign
+    // 确保高度设置正确
     if (this.contentWrapper) {
-      this.contentWrapper.style.height = `${this.items.length * this.itemHeight}px`;
+      this.contentWrapper.style.height = `${this.totalHeight * this.heightScale}px`;
     }
 
     this.visibleStartIndex = 0;
@@ -198,7 +219,8 @@ class VirtualScroll {
    */
   scrollToIndex(index) {
     if (index >= 0 && index < this.items.length) {
-      this.scrollContainer.scrollTop = index * this.itemHeight;
+      // 考虑缩放因子进行滚动
+      this.scrollContainer.scrollTop = index * this.itemHeight * this.heightScale;
     }
   }
 
