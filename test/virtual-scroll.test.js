@@ -5,8 +5,11 @@
 // Mock DOM environment
 document.body.innerHTML = '<div id="container" style="height: 500px;"></div>';
 
+// Import Jest
+import { jest } from '@jest/globals';
+
 // Import the module being tested
-const { VirtualScroll } = require('../src/virtual-scroll');
+import { VirtualScroll } from '../src/virtual-scroll';
 
 // Test data
 const testData = Array.from({ length: 1000 }, (_, i) => ({ id: i, name: `Item ${i}` }));

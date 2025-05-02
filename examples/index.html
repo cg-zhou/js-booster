@@ -183,8 +183,8 @@
 
   </div>
 
-  <!-- Import virtual scroll component -->
-  <script src="../src/virtual-scroll.js"></script>
+  <!-- Import virtual scroll component from CDN -->
+  <script src="https://unpkg.com/js-booster/dist/js-booster.min.js"></script>
 
   <script>
     // Generate test data
@@ -202,7 +202,7 @@
       const container = document.getElementById('basic-demo');
 
       // Create virtual scroll instance
-      const virtualScroll = new VirtualScroll({
+      const virtualScroll = new JsBooster.VirtualScroll({
         container: container,
         items: data,
         itemHeight: 40,

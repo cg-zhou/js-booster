@@ -1,7 +1,7 @@
 /**
  * js-booster - High-performance frontend library
  * VirtualScroll - Virtual scrolling implementation
- * @version 1.0.0
+ * @version 1.0.1
  * @author https://cg-zhou.top/
  * @license MIT
  */

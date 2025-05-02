@@ -4,8 +4,20 @@ High-performance JavaScript utility library, providing components like virtual s
 
 ## Installation
 
+### NPM
+
 ```bash
 npm install js-booster
+```
+
+### CDN
+
+```html
+<!-- Production (minified) -->
+<script src="https://unpkg.com/js-booster@1.0.1/dist/js-booster.min.js"></script>
+
+<!-- Development (unminified) -->
+<script src="https://unpkg.com/js-booster@1.0.1/dist/js-booster.js"></script>
 ```
 
 ## Usage
@@ -13,7 +25,8 @@ npm install js-booster
 ### Browser Direct Reference
 
 ```html
-<script src="path/to/js-booster/src/index.js"></script>
+<!-- Using CDN -->
+<script src="https://unpkg.com/js-booster@1.0.1/dist/js-booster.min.js"></script>
 
 <div id="container" style="height: 500px;"></div>
 
@@ -27,19 +40,23 @@ npm install js-booster
     bufferSize: 10,
     renderItem: (item, index) => {
       const div = document.createElement('div');
-      div.className = 'vs-table-row';
+      div.style.display = 'flex';
+      div.style.borderBottom = '1px solid #eee';
       div.innerHTML = `
-        <div class="vs-table-cell">${item.id}</div>
-        <div class="vs-table-cell">${item.name}</div>
+        <div style="width: 80px; padding: 10px;">${item.id}</div>
+        <div style="flex: 1; padding: 10px;">${item.name}</div>
       `;
       return div;
     },
     renderHeader: () => {
       const header = document.createElement('div');
-      header.className = 'vs-table-header vs-header';
+      header.style.display = 'flex';
+      header.style.fontWeight = 'bold';
+      header.style.backgroundColor = '#f8f9fa';
+      header.style.borderBottom = '2px solid #dee2e6';
       header.innerHTML = `
-        <div class="vs-table-header-cell">ID</div>
-        <div class="vs-table-header-cell">Name</div>
+        <div style="width: 80px; padding: 10px;">ID</div>
+        <div style="flex: 1; padding: 10px;">Name</div>
       `;
       return header;
     }
