@@ -1,7 +1,7 @@
 {
   "name": "js-booster",
   "version": "1.0.8",
-  "description": "高性能JavaScript工具库，包含虚拟滚动等组件",
+  "description": "JS utility library with virtual scrolling | JS工具库，包含虚拟滚动",
   "type": "module",
   "main": "dist/js-booster.js",
   "module": "dist/js-booster.esm.js",
