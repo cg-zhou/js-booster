@@ -1,7 +1,7 @@
 /**
  * js-booster - High-performance frontend library
  * VirtualScroll - Virtual scrolling implementation
- * @version 1.0.8
+ * @version 1.1.0
  * @author https://cg-zhou.top/
  * @license MIT
  */
@@ -12,7 +12,7 @@ class VirtualScroll {
    * @param {Object} options Configuration options
    * @param {HTMLElement} options.container Scroll container element
    * @param {Array} options.items Data items to display
-   * @param {number} [options.itemHeight=40] Height of each list item (pixels)
+   * @param {number} [options.itemHeight=20] Height of each list item (pixels)
    * @param {number} [options.bufferSize=10] Number of buffer items outside the visible area
    * @param {Function} [options.renderItem] Custom item rendering function
    * @param {Function} [options.renderHeader] Custom header rendering function
@@ -21,11 +21,11 @@ class VirtualScroll {
   constructor(options) {
     this.container = options.container;
     this.items = options.items || [];
-    this.itemHeight = options.itemHeight || 40;
+    this.itemHeight = options.itemHeight || 20;
     this.bufferSize = options.bufferSize || 10;
     this.customRenderItem = options.renderItem;
     this.customRenderHeader = options.renderHeader;
-    this.maxHeight = options.maxHeight || 26840000; // 添加最大高度限制，防止DOM高度过大
+    this.maxHeight = options.maxHeight || 26840000; // Add maximum height limit to prevent DOM height overflow
 
     this.visibleStartIndex = 0;
     this.visibleEndIndex = 0;
@@ -33,9 +33,9 @@ class VirtualScroll {
     this.contentWrapper = null;
     this.contentContainer = null;
     this.totalHeight = this.items.length * this.itemHeight;
-    this.heightScale = 1; // 高度缩放因子
+    this.heightScale = 1; // Height scaling factor
 
-    // 如果总高度超过最大高度，计算缩放因子
+    // If total height exceeds maximum height, calculate scaling factor
     if (this.totalHeight > this.maxHeight) {
       this.heightScale = this.maxHeight / this.totalHeight;
     }
@@ -89,8 +89,8 @@ class VirtualScroll {
       position: 'relative',
       width: '100%'
     });
-    
-    // 使用缩放后的高度，确保不超过浏览器限制
+
+    // Use scaled height to ensure it doesn't exceed browser limits
     const scaledHeight = this.totalHeight * this.heightScale;
     this.contentWrapper.style.height = `${scaledHeight}px`;
 
@@ -123,7 +123,7 @@ class VirtualScroll {
     const scrollTop = this.scrollContainer.scrollTop;
     const containerHeight = this.scrollContainer.clientHeight;
 
-    // 考虑缩放因子进行计算
+    // Consider scaling factor in calculations
     const realScrollTop = scrollTop / this.heightScale;
 
     // Calculate visible range
@@ -151,7 +151,7 @@ class VirtualScroll {
     // Clear content container
     this.contentContainer.innerHTML = '';
 
-    // 考虑缩放因子设置位置
+    // Set position considering scaling factor
     this.contentContainer.style.transform = `translateY(${startIndex * this.itemHeight * this.heightScale}px)`;
 
     // Render visible items
@@ -193,14 +193,14 @@ class VirtualScroll {
   updateItems(items) {
     this.items = items || [];
     this.totalHeight = this.items.length * this.itemHeight;
-    
-    // 重新计算缩放因子
+
+    // Recalculate scaling factor
     this.heightScale = 1;
     if (this.totalHeight > this.maxHeight) {
       this.heightScale = this.maxHeight / this.totalHeight;
     }
 
-    // 确保高度设置正确
+    // Ensure height is set correctly
     if (this.contentWrapper) {
       this.contentWrapper.style.height = `${this.totalHeight * this.heightScale}px`;
     }
@@ -219,7 +219,7 @@ class VirtualScroll {
    */
   scrollToIndex(index) {
     if (index >= 0 && index < this.items.length) {
-      // 考虑缩放因子进行滚动
+      // Apply scaling factor when scrolling
       this.scrollContainer.scrollTop = index * this.itemHeight * this.heightScale;
     }
   }
@@ -260,5 +260,5 @@ class VirtualScroll {
   }
 }
 
-// 导出 VirtualScroll 类
+// Export VirtualScroll class
 export { VirtualScroll };
