@@ -1,7 +1,7 @@
 /**
  * js-booster - High-performance frontend library
  * VirtualScroll - Virtual scrolling implementation
- * @version 1.1.0
+ * @version 1.1.1
  * @author https://cg-zhou.top/
  * @license MIT
  */
@@ -67,17 +67,6 @@ class VirtualScroll {
     if (this.customRenderHeader) {
       const header = this.customRenderHeader();
       if (header) {
-        // Add necessary styles
-        Object.assign(header.style, {
-          position: 'sticky',
-          top: '0',
-          zIndex: '1',
-          width: '100%',
-          boxSizing: 'border-box',
-          backgroundColor: '#f8f9fa',
-          borderBottom: '2px solid #dee2e6'
-        });
-
         this.scrollContainer.appendChild(header);
       }
     }
@@ -112,7 +101,7 @@ class VirtualScroll {
     this.container.appendChild(this.scrollContainer);
 
     // Render initial visible items
-    this.renderVisibleItems(0, Math.min(50, this.items.length));
+    this.renderVisibleItems(0, Math.min(100, this.items.length));
   }
 
   /**
