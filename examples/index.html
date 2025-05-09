@@ -206,13 +206,13 @@
     <p>High-performance virtual scrolling component for rendering large datasets efficiently.</p>
 
     <div class="demo-section">
-      <div class="demo-title">Basic Example - 1,000,000 Items</div>
+      <div class="demo-title">Basic Example - 200,000 Items</div>
       <div class="controls">
         <button id="scroll-top">Scroll to Top</button>
         <button id="scroll-middle">Scroll to Middle</button>
         <button id="scroll-bottom">Scroll to Bottom</button>
         <button id="scroll-to">Scroll to Index</button>
-        <input type="number" id="scroll-index" value="500" min="0" max="999999">
+        <input type="number" id="scroll-index" value="500" min="0" max="199999">
       </div>
       <div id="basic-demo" class="scroll-container"></div>
     </div>
@@ -240,7 +240,7 @@
 
     // Basic example
     document.addEventListener('DOMContentLoaded', () => {
-      const data = generateData(1000000);
+      const data = generateData(200000);
       const container = document.getElementById('basic-demo');
 
       // Create virtual scroll instance
@@ -281,16 +281,16 @@
       });
 
       document.getElementById('scroll-middle').addEventListener('click', () => {
-        virtualScroll.scrollToIndex(500000);
+        virtualScroll.scrollToIndex(100000);
       });
 
       document.getElementById('scroll-bottom').addEventListener('click', () => {
-        virtualScroll.scrollToIndex(999999);
+        virtualScroll.scrollToIndex(199999);
       });
 
       document.getElementById('scroll-to').addEventListener('click', () => {
         const index = parseInt(document.getElementById('scroll-index').value, 10);
-        if (!isNaN(index) && index >= 0 && index < 1000000) {
+        if (!isNaN(index) && index >= 0 && index < 200000) {
           virtualScroll.scrollToIndex(index);
         }
       });
