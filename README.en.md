@@ -10,6 +10,10 @@ High-performance JavaScript utility library, providing components like virtual s
 
 English | [简体中文](./README.md)
 
+## Examples
+
+Check out the [live examples](https://cg-zhou.github.io/js-booster/examples) or [example code](https://github.com/cg-zhou/js-booster/tree/main/examples).
+
 ## Features
 
 - 🚀 **High-performance Virtual Scrolling** - Easily render millions of records while maintaining smooth scrolling
@@ -106,10 +110,6 @@ function scrollToItem(index) {
   virtualScroll.scrollToIndex(index);
 }
 ```
-
-## Examples
-
-Check out the [live examples](https://cg-zhou.github.io/js-booster/examples) or [example code](https://github.com/cg-zhou/js-booster/tree/main/examples).
 
 ## API Reference
 

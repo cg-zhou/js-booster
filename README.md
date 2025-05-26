@@ -10,6 +10,10 @@
 
 [English](./README.en.md) | 简体中文
 
+## 示例
+
+查看 [在线示例](https://cg-zhou.github.io/js-booster/examples) 或 [示例代码](https://github.com/cg-zhou/js-booster/tree/main/examples)。
+
 ## 特性
 
 - 🚀 **高性能虚拟滚动** - 轻松渲染百万级数据，保持流畅的滚动体验
@@ -106,10 +110,6 @@ function scrollToItem(index) {
   virtualScroll.scrollToIndex(index);
 }
 ```
-
-## 示例
-
-查看 [在线示例](https://cg-zhou.github.io/js-booster/examples) 或 [示例代码](https://github.com/cg-zhou/js-booster/tree/main/examples)。
 
 ## API 参考
 
