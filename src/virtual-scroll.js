@@ -1,7 +1,7 @@
 /**
  * js-booster - High-performance frontend library
  * VirtualScroll - Virtual scrolling implementation
- * @version 1.1.1
+ * @version 1.1.3
  * @author https://cg-zhou.top/
  * @license MIT
  */
@@ -123,8 +123,13 @@ class VirtualScroll {
     );
 
     // Only update when visible range changes
-    if (startIndex !== this.visibleStartIndex || endIndex !== this.visibleEndIndex) {
+    if (startIndex !== this.visibleStartIndex
+       || endIndex !== this.visibleEndIndex
+       || endIndex === 0) {
       this.renderVisibleItems(startIndex, endIndex);
+
+      this.visibleStartIndex = startIndex;
+      this.visibleEndIndex = endIndex;
     }
   }
 
@@ -170,9 +175,6 @@ class VirtualScroll {
         this.contentContainer.appendChild(row);
       }
     }
-
-    this.visibleStartIndex = startIndex;
-    this.visibleEndIndex = endIndex;
   }
 
   /**
