@@ -125,8 +125,6 @@ class VirtualScroll {
     // Only update when visible range changes
     if (startIndex !== this.visibleStartIndex || endIndex !== this.visibleEndIndex) {
       this.renderVisibleItems(startIndex, endIndex);
-      this.visibleStartIndex = startIndex;
-      this.visibleEndIndex = endIndex;
     }
   }
 
@@ -172,6 +170,9 @@ class VirtualScroll {
         this.contentContainer.appendChild(row);
       }
     }
+
+    this.visibleStartIndex = startIndex;
+    this.visibleEndIndex = endIndex;
   }
 
   /**
