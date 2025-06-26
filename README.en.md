@@ -22,6 +22,10 @@ Check out the [live examples](https://cg-zhou.github.io/js-booster/examples) or 
 - 📦 **Lightweight** - Zero dependencies, small footprint, fast loading
 - 🔧 **Highly Customizable** - Support for custom rendering functions to meet various UI requirements
 
+## Note
+
+Browsers have a maximum height limit for DOM elements (typically in the tens of millions of pixels, varying by browser). When dealing with extremely large datasets (e.g., millions of items), the calculated total height might exceed this limit. This can cause the native scrollbar to behave unexpectedly (e.g., a small drag scrolls through a large amount of content). `js-booster` internally mitigates this rendering issue by scaling the content height, but the scrollbar interaction experience may still be affected for such massive datasets.
+
 ## Installation
 
 ### NPM
@@ -138,7 +142,7 @@ function scrollToItem(index) {
 
 ## Performance Benchmarks
 
-js-booster virtual scrolling component maintains smooth performance even with millions of records:
+js-booster virtual scrolling component maintains smooth performance even with hundreds of thousands of records:
 
 - 1 million items: Initialization time < 50ms
 - Scrolling performance: Stable at 60fps

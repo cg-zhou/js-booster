@@ -1,6 +1,6 @@
 /**
  * js-booster - High-performance frontend library
- * @version 1.1.3
+ * @version __VERSION__
  * @author https://cg-zhou.top/
  * @license MIT
  */

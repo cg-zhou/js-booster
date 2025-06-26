@@ -1,6 +1,7 @@
 import terser from '@rollup/plugin-terser';
 import resolve from '@rollup/plugin-node-resolve';
 import commonjs from '@rollup/plugin-commonjs';
+import replace from '@rollup/plugin-replace';
 
 export default [
   // UMD 版本 (未压缩)
@@ -13,6 +14,10 @@ export default [
       sourcemap: true
     },
     plugins: [
+      replace({
+        preventAssignment: true,
+        __VERSION__: JSON.stringify(process.env.npm_package_version)
+      }),
       resolve(),
       commonjs()
     ]
@@ -27,6 +32,10 @@ export default [
       sourcemap: true
     },
     plugins: [
+      replace({
+        preventAssignment: true,
+        __VERSION__: JSON.stringify(process.env.npm_package_version)
+      }),
       resolve(),
       commonjs(),
       terser()
@@ -41,6 +50,10 @@ export default [
       sourcemap: true
     },
     plugins: [
+      replace({
+        preventAssignment: true,
+        __VERSION__: JSON.stringify(process.env.npm_package_version)
+      }),
       resolve(),
       commonjs()
     ]
@@ -54,6 +67,10 @@ export default [
       sourcemap: true
     },
     plugins: [
+      replace({
+        preventAssignment: true,
+        __VERSION__: JSON.stringify(process.env.npm_package_version)
+      }),
       resolve(),
       commonjs()
     ]
